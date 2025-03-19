@@ -125,7 +125,7 @@ resource "kubernetes_ingress_v1" "app_ingress" {
       "alb.ingress.kubernetes.io/healthcheck-port" = "8081"
       "alb.ingress.kubernetes.io/listen-ports"    = jsonencode([{ "HTTPS" : 443 }, { "HTTP" : 80 }])
       "alb.ingress.kubernetes.io/ssl-redirect"    = "443"
-      "alb.ingress.kubernetes.io/certificate-arn" = "arn:aws:acm:us-east-1:476134988768:certificate/84ee5a25-7e18-4c5d-92c1-4067d137a89d"
+      "alb.ingress.kubernetes.io/certificate-arn" = "arn:aws:acm:us-east-1:4761334568:certificate/84ee5a25-7e18-4c5d-92c1-44566466d"
       # Add your ACM ARN here if using HTTPS
       #"kubernetes.io/ingress.class" = "alb"
     }
