@@ -1,0 +1,186 @@
+secrets:
+  huggingface:
+    create: false
+    name: "huggingface-secret"
+
+resourceProfiles:
+  my-custom-gpu:
+    imageName: "nvidia-gpu"
+    nodeSelector:
+      my-custom-node-pool: "gpu"
+    limits:
+      nvidia.com/gpu: "1"
+      cpu: "8"
+      memory: "8Gi"
+      ephemeral-storage: "10Gi"
+    requests:
+      nvidia.com/gpu: "1"
+      cpu: "4"
+      memory: "6Gi"
+      ephemeral-storage: "6Gi"
+
+service:
+  type: ClusterIP
+  port: 80
+
+persistence:
+  enabled: true
+  storageClass: "efs-sc"
+  size: 100Gi
+
+# ingress:
+#   enabled: true
+#   annotations:
+#     # alb.ingress.kubernetes.io/scheme "internal"
+#     # kubernetes.io/ingress.class: "alb"
+#     # alb.ingress.kubernetes.io/scheme: "internal"
+#     # alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}, {"HTTP": 80}]'
+#     # alb.ingress.kubernetes.io/ssl-redirect: "443"
+#     # alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-1:476134988768:certificate/84ee5a25-7e18-4c5d-92c1-4067d137a89d"
+#     kubernetes.io/ingress.class: "alb"
+#     alb.ingress.kubernetes.io/scheme: "internal"
+#     alb.ingress.kubernetes.io/target-type: "ip"
+#     alb.ingress.kubernetes.io/healthcheck-path: "/healthz"
+#     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}, {"HTTP": 80}]'
+#     alb.ingress.kubernetes.io/ssl-redirect: "443"
+#     alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-1:476134988768:certificate/84ee5a25-7e18-4c5d-92c1-4067d137a89d"
+#     alb.ingress.kubernetes.io/healthcheck-port: "8081"
+#   rules:
+#     - host: flow.net
+#       paths:
+#         - path: /kubeai
+#           pathType: Prefix
+#           service:
+#             name: kubeai
+#             port: 80
+#         - path: /openwebui
+#           port: 80
+#           pathType: Prefix
+#           service:
+#             name: openwebui
+#             port: 80
+# open-webui:
+#   enabled: true
+#   service:
+#     type: ClusterIP
+#     port: 8080 # Changed to match pod port
+#     targetPort: 8080
+#     containerPort: 8080
+#   livenessProbe:
+#     httpGet:
+#       path: /
+#       port: 8080
+#     initialDelaySeconds: 30
+#     periodSeconds: 10
+#   readinessProbe:
+#     httpGet:
+#       path: /
+#       port: 8080
+#     initialDelaySeconds: 30
+#     periodSeconds: 10
+#   livenessProbe:
+#     httpGet:
+#       path: /healthz
+#       port: 8081
+#     initialDelaySeconds: 120
+#     periodSeconds: 20
+#   readinessProbe:
+#     httpGet:
+#       path: /readyz
+#       port: 8081
+#     initialDelaySeconds: 5
+#     periodSeconds: 10
+# # tls:
+# #   - secretName: tls-certs-kubeai
+# #     hosts:
+# #       - flow.net
+# livenessProbe:
+#   httpGet:
+#     path: /healthz
+#     port: 8081
+#   initialDelaySeconds: 120
+#   periodSeconds: 20
+# readinessProbe:
+#   httpGet:
+#     path: /readyz
+#     port: 8081
+#   initialDelaySeconds: 5
+#   periodSeconds: 10
+# ingress:
+#   enabled: true
+#   annotations:
+#     # alb.ingress.kubernetes.io/scheme "internal"
+#     # kubernetes.io/ingress.class: "alb"
+#     # alb.ingress.kubernetes.io/scheme: "internal"
+#     # alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}, {"HTTP": 80}]'
+#     # alb.ingress.kubernetes.io/ssl-redirect: "443"
+#     # alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-1:476134988768:certificate/84ee5a25-7e18-4c5d-92c1-4067d137a89d"
+#     kubernetes.io/ingress.class: "alb"
+#     alb.ingress.kubernetes.io/scheme: "internal"
+#     alb.ingress.kubernetes.io/target-type: "ip"
+#     alb.ingress.kubernetes.io/healthcheck-path: "/healthz"
+#     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}, {"HTTP": 80}]'
+#     alb.ingress.kubernetes.io/ssl-redirect: "443"
+#     alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-1:476134988768:certificate/84ee5a25-7e18-4c5d-92c1-4067d137a89d"
+#     alb.ingress.kubernetes.io/healthcheck-port: "8081"
+#   rules:
+#     - host: flow.net
+#       paths:
+#         - path: /kubeai
+#           pathType: Prefix
+#           service:
+#             name: kubeai
+#             port: 80
+#         - path: /openwebui
+#           port: 80
+#           pathType: Prefix
+#           service:
+#             name: openwebui
+#             port: 8080
+# open-webui:
+#   enabled: true
+#   service:
+#     type: ClusterIP
+#     port: 8080 # Changed to match pod port
+#     targetPort: 8080
+#     containerPort: 8080
+#   livenessProbe:
+#     httpGet:
+#       path: /
+#       port: 8080
+#     initialDelaySeconds: 30
+#     periodSeconds: 10
+#   readinessProbe:
+#     httpGet:
+#       path: /
+#       port: 8080
+#     initialDelaySeconds: 30
+#     periodSeconds: 10
+#   livenessProbe:
+#     httpGet:
+#       path: /healthz
+#       port: 8081
+#     initialDelaySeconds: 120
+#     periodSeconds: 20
+#   readinessProbe:
+#     httpGet:
+#       path: /readyz
+#       port: 8081
+#     initialDelaySeconds: 5
+#     periodSeconds: 10
+# # tls:
+# #   - secretName: tls-certs-kubeai
+# #     hosts:
+# #       - flow.net
+# livenessProbe:
+#   httpGet:
+#     path: /healthz
+#     port: 8081
+#   initialDelaySeconds: 120
+#   periodSeconds: 20
+# readinessProbe:
+#   httpGet:
+#     path: /readyz
+#     port: 8081
+#   initialDelaySeconds: 5
+#   periodSeconds: 10
